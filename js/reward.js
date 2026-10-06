@@ -1,0 +1,5 @@
+/* PendingReward is bound to one room; resolution is an atomic, idempotent operation. */
+B.Reward={
+ create(run){const id=run.run_id+':'+run.active_room_id;const rng=B.Rng(run.seed+run.map.findIndex(n=>n.id===run.active_room_id)*719);return {id,room_id:run.active_room_id,gold:B.Config.gold_reward,candidates:B.Shuffle(B.Cards.filter(c=>!B.Heroes[run.character_id].starter.includes(c.id)),rng).slice(0,3).map(c=>c.id),mode:'choice',resolved:false};},
+ resolve(run,reward,kind,card_id){if(!reward||reward.resolved||run.resolved_reward_ids.includes(reward.id)||run.active_room_id!==reward.room_id)return false;if(!['gold','card','skip'].includes(kind))return false;if(kind==='card'&&!reward.candidates.includes(card_id))return false;reward.resolved=true;run.resolved_reward_ids.push(reward.id);if(kind==='gold')B.Run.addGold(run,reward.gold);if(kind==='card')B.Run.addCard(run,card_id);run.room_results[reward.room_id]={reward:kind,card_id:card_id||null,gold:kind==='gold'?reward.gold:0};B.Dungeon.complete(run);return true;}
+};
