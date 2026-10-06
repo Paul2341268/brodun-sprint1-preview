@@ -1,5 +1,18 @@
 # BRODUN Sprint 5 웹 프로토타입
 
+## Sprint 5 후속: 전투 판단 UI와 Addon v2
+
+기본 공격4~5, 첫 일반 HP38, 일반/엘리트/보스 패턴, 적 옆 Intent와 큰 행동력 패널, 신규 몬스터·맵 선택 UI·이벤트 배경을 추가했다. 핵심 던전/보상/덱 성장 흐름은 유지한다.
+
+- [전투·에셋 적용 보고서](SPRINT5_ADDON_REPORT.md): 이전/이후 수치, 카드 변경, Intent·테스트·미구현 범위.
+- [실제 ZIP 분석서](ASSET_ADDON_ANALYSIS.md): 9종/180프레임·누락/충돌·Unity 임포터 위험.
+- 일반 플레이에서는 Seed를 표시하지 않는다. 재현 테스트용 [Debug 모드](https://paul2341268.github.io/brodun-sprint1-preview/?debug=1&seed=17)에서만 입력/확인이 가능하다.
+- 본편은 1구역 진행이다. 2·3구역6종은 데이터와 에셋 모음에서 5동작을 확인할 수 있으며, 구역 연속 진행은 아직 없다.
+- 적 공격 Intent는 방어 전 수치이며 실제 HP 감소는 방어 흡수 후 값이다. 툴팁과 예상 HP 피해를 함께 확인한다.
+- 테스트: `node tests/model.cjs`, `node tests/balance.cjs`, Playwright/Edge 환경에서 `node tests/browser.cjs`.
+
+아래는 앞선 Sprint 5/Sprint 1 기록이며 수치와 화면 설명은 당시 버전이다.
+
 현재 버전: 2026-10-06. 기존 Sprint 1 아트·카드 전투를 유지하면서 던전 맵·보상·영구 덱·골드·중앙 상태 관리를 연결했다.
 
 - 실행: [GitHub Pages](https://paul2341268.github.io/brodun-sprint1-preview/) 또는 이 폴더의 `index.html`.
